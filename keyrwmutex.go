@@ -8,40 +8,40 @@ import (
 	"k8s.io/utils/keymutex"
 )
 
-var _ keymutex.KeyMutex = (*keyRWMutex)(nil)
+var _ keymutex.KeyMutex = (*KeyRWMutex)(nil)
 
-type keyRWMutex struct {
+type KeyRWMutex struct {
 	mutexes []sync.RWMutex
 }
 
-func New(n int) *keyRWMutex {
+func New(n int) *KeyRWMutex {
 	if n <= 0 {
 		n = runtime.NumCPU()
 	}
-	return &keyRWMutex{
+	return &KeyRWMutex{
 		mutexes: make([]sync.RWMutex, n),
 	}
 }
 
-func (km *keyRWMutex) LockKey(key string) {
+func (km *KeyRWMutex) LockKey(key string) {
 	km.mutexes[km.hash(key)%uint32(len(km.mutexes))].Lock()
 }
 
-func (km *keyRWMutex) UnlockKey(key string) error {
+func (km *KeyRWMutex) UnlockKey(key string) error {
 	km.mutexes[km.hash(key)%uint32(len(km.mutexes))].Unlock()
 	return nil
 }
 
-func (km *keyRWMutex) RLockKey(key string) {
+func (km *KeyRWMutex) RLockKey(key string) {
 	km.mutexes[km.hash(key)%uint32(len(km.mutexes))].RLock()
 }
 
-func (km *keyRWMutex) RUnlockKey(key string) error {
+func (km *KeyRWMutex) RUnlockKey(key string) error {
 	km.mutexes[km.hash(key)%uint32(len(km.mutexes))].RUnlock()
 	return nil
 }
 
-func (km *keyRWMutex) hash(id string) uint32 {
+func (km *KeyRWMutex) hash(id string) uint32 {
 	h := fnv.New32a()
 	h.Write([]byte(id))
 	return h.Sum32()
