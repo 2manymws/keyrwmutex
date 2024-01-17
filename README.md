@@ -1,4 +1,4 @@
-# keyrmutex
+# keyrwmutex
 
 `keyrwmutex` is a package that provides R/W locks per key.
 
