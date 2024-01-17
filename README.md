@@ -1,6 +1,6 @@
 # keyrwmutex
 
-`keyrwmutex` is a package that provides R/W locks per key.
+`keyrwmutex` is a package that provides R/W locks on arbitrary strings.
 
 This is created by combining [keymutex.hashedKeyMutex](https://pkg.go.dev/k8s.io/utils/keymutex#NewHashed) and [sync.RWMutex](https://pkg.go.dev/sync#RWMutex).
 
