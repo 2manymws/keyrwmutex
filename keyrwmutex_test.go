@@ -9,8 +9,8 @@ const (
 	callbackTimeout = 1 * time.Second
 )
 
-func newKeyMutexes() []*keyRWMutex {
-	return []*keyRWMutex{
+func newKeyMutexes() []*KeyRWMutex {
+	return []*KeyRWMutex{
 		New(0),
 		New(1),
 		New(2),
@@ -129,12 +129,12 @@ func Test_Lock_RLock(t *testing.T) {
 	}
 }
 
-func lockAndCallback(km *keyRWMutex, id string, callbackCh chan<- interface{}) {
+func lockAndCallback(km *KeyRWMutex, id string, callbackCh chan<- interface{}) {
 	km.LockKey(id)
 	callbackCh <- true
 }
 
-func rLockAndCallback(km *keyRWMutex, id string, callbackCh chan<- interface{}) {
+func rLockAndCallback(km *KeyRWMutex, id string, callbackCh chan<- interface{}) {
 	km.RLockKey(id)
 	callbackCh <- true
 }
