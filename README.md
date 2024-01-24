@@ -6,4 +6,4 @@ This is created by combining [keymutex.hashedKeyMutex](https://pkg.go.dev/k8s.io
 
 ## References
 
-- [k8s.io/utils/keymutex](github.com/kubernates/utils)
+- [k8s.io/utils/keymutex](https://github.com/kubernetes/utils/tree/master/keymutex)
